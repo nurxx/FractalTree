@@ -1,46 +1,59 @@
 import turtle
 import tkinter
 from turtle import *
-from random_colors_generator import *
+from random import randint
 
 MIN_DEPTH = 1
+height = 280
+
+color_palette= ['#fad089','#ff9c5b','#f8ed62','#3b8183','#2b696b']
+
 turtle.title('Pythagoras Tree')
 window = turtle.Screen().bgcolor('#000000')
-tree = turtle.Turtle()
-tree.speed(200)
+turtle.Turtle()
 
+turtle.hideturtle()
+turtle.speed(0)
 
-recursion_depth = int(turtle.numinput("Fractal tree", "Input fractal tree's max leaves count:", 10, minval=1, maxval=20))
+levels = int(turtle.numinput("Pythagoras Tree", "Въведете брой итерации: ", 10, minval=2, maxval=19))
+if levels > 15:
+    height+=100
 
-if recursion_depth in list(range(1,10)):
-    tree.pensize(1)
-else:
-    tree.pensize(2)
+turtle.pensize(levels)
+turtle.sety(-300)
 
-tree.sety(-300)
+turtle.color(color_palette[-1])
 
-tree.color(generate_random_color())
+turtle.left(90)
+turtle.penup()
+turtle.backward(height)
+turtle.pendown()
+turtle.forward(height)
+angle = 30
 
-tree.left(90)
+def draw(height,iterations):
+    width=turtle.pensize()
 
-tree.shape('turtle')
+    turtle.pensize(3/4*width)
+    height = 3/4*height
 
-def draw(leaves):
-    if leaves < recursion_depth:
-        return
-    else:
-        tree.color(generate_random_color())
-        tree.forward(leaves)
-        tree.left(30)
-        draw(leaves*3/4)
-        tree.color(generate_random_color())
-        tree.right(60)
-        draw(leaves*3/4)
-        tree.color(generate_random_color())
-        tree.left(30)
-        tree.backward(leaves)
+    turtle.left(angle)
+    turtle.forward(height)
+    turtle.color(color_palette[randint(0,4)])
+    if iterations < levels:
+        draw(height, iterations + 1)
+    turtle.backward(height)
+    turtle.right(2*angle)
+    turtle.forward(height)
+
+    turtle.color(color_palette[randint(0,4)])
+    if iterations < levels:
+        draw(height, iterations + 1)
+    turtle.backward(height)
+    turtle.left(angle)
+    turtle.pensize(width)
 
 if __name__=='__main__':
-    draw(200)
+    draw(height,2)
     turtle.bye()
     done()
