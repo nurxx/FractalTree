@@ -55,5 +55,4 @@ def draw(height,iterations):
 
 if __name__=='__main__':
     draw(height,2)
-    turtle.bye()
     done()
