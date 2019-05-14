@@ -10,6 +10,8 @@ color_palette= ['#fad089','#ff9c5b','#f8ed62','#3b8183','#2b696b']
 
 turtle.title('Pythagoras Tree')
 window = turtle.Screen().bgcolor('#000000')
+turtle.screensize()
+turtle.setup(width=1.0,height=0.9)
 turtle.Turtle()
 
 turtle.hideturtle()
